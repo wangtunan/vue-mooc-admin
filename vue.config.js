@@ -1,17 +1,27 @@
-import path from 'path'
+const path = require('path')
+
 function resolve (dir) {
   return path.resolve(__dirname, dir)
 }
 
-export default {
+module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   productionSourceMap: false,
   lintOnSave: true,
-  chainWebpack: config => {
-    config.resolve.alias
-      .set('api', resolve('src/api'))
-      .set('components', resolve('stc/components'))
-      .set('views', resolve('src/views'))
-      .set('utils', resolve('src/utils'))
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': resolve('src'),
+        api: resolve('src/api'),
+        assets: resolve('src/assets/styles'),
+        components: resolve('src/components'),
+        utils: resolve('src/utils'),
+        views: resolve('src/views'),
+        types: resolve('src/types')
+      }
+    }
+  },
+  devServer: {
+    port: 3000
   }
 }

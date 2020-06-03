@@ -1,7 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
+export interface MoocResponse {
+  code: number
+  msg?: string
+  data: any
+}
 const service = axios.create({
-  baseURL: process.env.VUE_BASE_URL,
+  baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 1000
 })
 

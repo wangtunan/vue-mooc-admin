@@ -13,6 +13,8 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { State, Getter } from 'vuex-class'
+import { getHotList } from 'api/common'
+import { ResponseConfig } from '@/types/ajax'
 
 @Component
 export default class Test extends Vue {
@@ -39,6 +41,10 @@ export default class Test extends Vue {
   }
 
   private mounted () {
+    getHotList().then((res: ResponseConfig) => {
+      const { code, msg, data } = res
+      console.log(code, msg, data)
+    })
     console.log('component mounted')
   }
 }
